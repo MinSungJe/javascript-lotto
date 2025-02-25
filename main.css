@@ -1,0 +1,17 @@
+* {
+  --color-primary: #4e5ba6;
+  --color-grayscale-1: #ffffff;
+  --color-grayscale-2: #fcfcfd;
+  --color-grayscale-3: #b4b4b4;
+  --color-grayscale-4: #8b8b8b;
+  --color-grayscale-5: #000000;
+  --text-title: 2.4rem;
+  --text-subtitle: 2rem;
+  --text-body: 1.5rem;
+  --text-placeholder: 1.5rem;
+  --text-caption: 1.4rem;
+}
+
+body {
+  font-size: 1.5rem;
+}
