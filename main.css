@@ -57,3 +57,8 @@ body {
   font-weight: 600;
   line-height: 105.882%;
 }
+
+.lotto-ticket-container {
+  display: flex;
+  align-items: center;
+}

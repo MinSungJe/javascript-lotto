@@ -12,8 +12,15 @@
   <body>
     <div id="app">
       <h1>🎱 행운의 로또</h1>
-      <p>🎟️ 12, 28, 22, 37, 19, 23</p>
+      <div class="lotto-container"></div>
     </div>
+
+    <template id="lotto-ticket">
+      <div class="lotto-ticket-container">
+        <p class="p-icon">🎟️</p>
+        <p class="p-body">12, 28, 22, 37, 19, 23</p>
+      </div>
+    </template>
 
     <script type="module" src="./src/step2-index.js"></script>
   </body>
