@@ -1,3 +1,10 @@
+var __typeError = (msg) => {
+  throw TypeError(msg);
+};
+var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot " + msg);
+var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
+var __privateMethod = (obj, member, method) => (__accessCheck(obj, member, "access private method"), method);
+var _LottoGame_instances, resetResult_fn;
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -106,6 +113,7 @@ function getRandomInt(max) {
 }
 class LottoGame {
   constructor(amount) {
+    __privateAdd(this, _LottoGame_instances);
     this.result = {
       1: 0,
       2: 0,
@@ -122,6 +130,7 @@ class LottoGame {
     return this.result;
   }
   calculate(targetNumber, bonusNumber) {
+    __privateMethod(this, _LottoGame_instances, resetResult_fn).call(this);
     this.lottos.forEach((lotto) => {
       const correctNumber = lotto.getCorrectNumber(targetNumber);
       const isBonus = lotto.hasBonusNumber(bonusNumber);
@@ -145,6 +154,16 @@ class LottoGame {
     return rawEarningRate.toFixed(1);
   }
 }
+_LottoGame_instances = new WeakSet();
+resetResult_fn = function() {
+  this.result = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0
+  };
+};
 class ListChecker {
   static isDefineLength(list, value) {
     return list.length === value;
