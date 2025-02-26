@@ -9,17 +9,34 @@
     <title>Document</title>
   </head>
 
-  <body>
+  <body class="p-body">
     <div id="app">
       <h1>🎱 행운의 로또</h1>
       <div class="lotto-container"></div>
+
+      <div class="winning-lotto-container">
+        <div class="target-number-container">
+          <p>당첨 번호</p>
+          <input class="number-input" />
+          <input class="number-input" />
+          <input class="number-input" />
+          <input class="number-input" />
+          <input class="number-input" />
+          <input class="number-input" />
+        </div>
+        <div class="bonus-number-container">
+          <p>보너스 번호</p>
+          <input class="number-input" />
+        </div>
+      </div>
+
       <button class="main-btn"><p class="p-caption">결과 확인하기</p></button>
     </div>
 
     <template id="lotto-ticket">
       <div class="lotto-ticket-container">
         <p class="p-icon">🎟️</p>
-        <p class="p-body">12, 28, 22, 37, 19, 23</p>
+        <p>12, 28, 22, 37, 19, 23</p>
       </div>
     </template>
 

@@ -12,11 +12,6 @@
   --text-placeholder: 1.5rem;
   --text-caption: 1.4rem;
 }
-
-body {
-  font-size: 1.5rem;
-}
-
 .p-bold {
   font-weight: 700;
 }
@@ -80,4 +75,27 @@ body {
 .lotto-ticket-container {
   display: flex;
   align-items: center;
+}
+
+.number-input {
+  width: 34px;
+  height: 36px;
+  text-align: center;
+}
+
+.winning-lotto-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.target-number-container > p {
+  margin-bottom: 8px;
+}
+
+.bonus-number-container {
+  text-align: end;
+}
+
+.bonus-number-container > p {
+  margin-bottom: 8px;
 }
