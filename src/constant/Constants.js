@@ -29,6 +29,7 @@ const Constants = Object.freeze({
     RESTART_STRING: "> 다시 시작하시겠습니까? (y/n) ",
   },
   ERROR: {
+    NO_LOTTO: "[ERROR] 로또를 구매하지 않으셨습니다!",
     PRICE_TYPE: "[ERROR] 금액은 숫자로 입력해야 한다.",
     PRICE_UNIT: "[ERROR] 금액은 1,000원으로 나누어 떨어져야 한다.",
     TARGET_NUMBER_LENGTH: "[ERROR] 당첨번호는 쉼표로 구분되어야 한다.",

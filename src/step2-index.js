@@ -7,10 +7,11 @@ import LottoGame from "./domain/LottoGame.js";
 import Validator from "./domain/Validator.js";
 
 const app = document.querySelector("#app");
-const lottoContainer = document.querySelector(".lotto-container");
-const lottoTicketList = document.querySelector(".lotto-ticket-list");
-const buyButton = document.querySelector("#buy");
-const getResultButton = document.querySelector("#getResult");
+const lottoContainer = app.querySelector(".lotto-container");
+const lottoTicketList = app.querySelector(".lotto-ticket-list");
+
+const buyButton = app.querySelector("#buy");
+const getResultButton = app.querySelector("#getResult");
 
 const lottoTicketTemplate = document.querySelector("#lotto-ticket");
 const resultModalTemplate = document.querySelector("#result-modal");
@@ -81,29 +82,67 @@ const displayResult = (gameResult, earningRate) => {
   resultModalClone.querySelector(
     "#earning-rate"
   ).textContent = `당신의 총 수익률은 ${earningRate}%입니다.`;
+
   app.prepend(resultModalClone);
+  addEventCloseButton();
+  addEventRestartButton();
+};
+
+const addEventCloseButton = () => {
+  const closeButton = app.querySelector("#close");
+  const resultModal = app.querySelector(".modal-background");
+  closeButton.addEventListener("click", () => {
+    app.removeChild(resultModal);
+  });
+};
+
+const addEventRestartButton = () => {
+  const restartButton = app.querySelector("#restart");
+  const resultModal = app.querySelector(".modal-background");
+  const priceInput = app.querySelector("#price");
+  const targetNumberInputList = app.querySelectorAll("#target");
+  const bonusNumberInput = app.querySelector("#bonus");
+
+  restartButton.addEventListener("click", () => {
+    lottoGame = undefined;
+    lottoContainer.querySelector("#lotto-status").textContent =
+      "아직 로또를 구매하지 않았습니다!";
+    lottoTicketList.replaceChildren();
+    priceInput.value = "";
+    targetNumberInputList.forEach(
+      (targetNumberInput) => (targetNumberInput.value = "")
+    );
+    bonusNumberInput.value = "";
+    app.removeChild(resultModal);
+  });
 };
 
 buyButton.addEventListener("click", () => {
-  const priceInputString = document.querySelector("#price").value;
+  const priceInputString = app.querySelector("#price").value;
   if (!checkCanPriceInput(priceInputString)) return;
   lottoNum = Number(priceInputString) / Constants.LOTTO.UNIT;
   displayLotto(lottoNum);
 });
 
 getResultButton.addEventListener("click", () => {
-  const targetNumberInputList = document.querySelectorAll("#target");
+  if (lottoGame === undefined) {
+    alert(Constants.ERROR.NO_LOTTO);
+    return;
+  }
+
+  const targetNumberInputList = app.querySelectorAll("#target");
   const targetNumberString = [...targetNumberInputList]
     .map((targetNumberInput) => targetNumberInput.value)
     .join(Constants.OPERATOR.SEPARATOR);
-  const bonusNumberString = document.querySelector("#bonus").value;
+  const bonusNumberString = app.querySelector("#bonus").value;
+
   if (!checkCanNumberInput(targetNumberString, bonusNumberString)) return;
 
   const targetNumber = targetNumberString
     .split(Constants.OPERATOR.SEPARATOR)
     .map((a) => Number(a.trim()));
   const bonusNumber = Number(bonusNumberString);
-
   lottoGame.calculate(targetNumber, bonusNumber);
+
   displayResult(lottoGame.getGameResult(), lottoGame.getEarningRate(lottoNum));
 });

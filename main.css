@@ -128,6 +128,7 @@
 }
 
 .modal-box {
+  position: relative;
   background: var(--lotto-greyscale-1, #fff);
   width: 350px;
   height: 500px;
@@ -200,4 +201,17 @@
 
 .winning-lotto-container > p {
   margin-bottom: 12px;
+}
+
+.close-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 14px;
+  height: 14px;
+  border: none;
+  background: none;
+  background-image: url("x-mark.svg");
+  background-size: cover;
 }
