@@ -6,31 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="main.css" />
-    <title>Document</title>
   </head>
 
   <body class="p-body">
     <div id="app">
       <h1>🎱 행운의 로또</h1>
-      <div class="lotto-container"></div>
+      <main class="lotto-app-container">
+        <h1 class="lotto-title p-title">🎱 내 번호 당첨 확인 🎱</h1>
+        <section class="input-box-container">
+          <p>구입할 금액을 입력해주세요.</p>
+          <div class="input-box">
+            <input placeholder="금액" />
+            <button class="main-btn"><p class="p-caption">구입</p></button>
+          </div>
+        </section>
+        <section class="lotto-container">
+          <p>총 7개를 구매하였습니다.</p>
+        </section>
 
-      <div class="winning-lotto-container">
-        <div class="target-number-container">
-          <p>당첨 번호</p>
-          <input class="number-input" />
-          <input class="number-input" />
-          <input class="number-input" />
-          <input class="number-input" />
-          <input class="number-input" />
-          <input class="number-input" />
-        </div>
-        <div class="bonus-number-container">
-          <p>보너스 번호</p>
-          <input class="number-input" />
-        </div>
-      </div>
+        <section class="winning-lotto-container">
+          <p>지난 주 당첨번호 6개와 보너스 번호 1개를 입력해주세요.</p>
+          <div class="winning-lotto">
+            <div class="target-number">
+              <p>당첨 번호</p>
+              <input class="number-input" />
+              <input class="number-input" />
+              <input class="number-input" />
+              <input class="number-input" />
+              <input class="number-input" />
+              <input class="number-input" />
+            </div>
+            <div class="bonus-number">
+              <p>보너스 번호</p>
+              <input class="number-input" />
+            </div>
+          </div>
+        </section>
 
-      <button class="main-btn"><p class="p-caption">결과 확인하기</p></button>
+        <button class="main-btn"><p class="p-caption">결과 확인하기</p></button>
+      </main>
     </div>
 
     <template id="lotto-ticket">
@@ -42,8 +56,8 @@
 
     <template id="result-modal">
       <div class="modal-background">
-        <div class="modal-box">
-          <p class="p-subtitle">🏆 당첨 통계 🏆</p>
+        <section class="modal-box">
+          <h2 class="p-subtitle">🏆 당첨 통계 🏆</h2>
           <table class="result-table">
             <thead>
               <tr>
@@ -84,7 +98,7 @@
           <button class="main-btn">
             <p class="p-caption">다시 시작하기</p>
           </button>
-        </div>
+        </section>
       </div>
     </template>
 

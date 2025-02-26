@@ -10,5 +10,5 @@ const lottoTicketTemplate = document.querySelector("#lotto-ticket");
 
 const resultModalClone = resultModalTemplate.content.cloneNode(true);
 const lottoTicketClone = lottoTicketTemplate.content.cloneNode(true);
-app.prepend(resultModalClone);
+// app.prepend(resultModalClone);
 lottoContainer.appendChild(lottoTicketClone);
