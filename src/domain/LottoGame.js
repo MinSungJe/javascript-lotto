@@ -22,7 +22,18 @@ class LottoGame {
     return this.result;
   }
 
+  #resetResult() {
+    this.result = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+    };
+  }
+
   calculate(targetNumber, bonusNumber) {
+    this.#resetResult();
     this.lottos.forEach((lotto) => {
       const correctNumber = lotto.getCorrectNumber(targetNumber);
       const isBonus = lotto.hasBonusNumber(bonusNumber);
