@@ -1,4 +1,5 @@
 * {
+  --lotto-primary-dark: #2a3159;
   --lotto-primary: #4e5ba6;
   --lotto-greyscale-1: #ffffff;
   --lotto-greyscale-2: #fcfcfd;
@@ -56,6 +57,24 @@ body {
   font-style: normal;
   font-weight: 600;
   line-height: 105.882%;
+}
+
+.main-btn {
+  width: 100%;
+  padding: 6px 6px 6px 8px;
+  border-radius: 4px;
+  background-color: var(--lotto-primary);
+  color: var(--lotto-greyscale-1, #fff);
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.main-btn p {
+  padding: 4px 6px;
+}
+
+.main-btn:hover {
+  background-color: var(--lotto-primary-dark);
 }
 
 .lotto-ticket-container {
