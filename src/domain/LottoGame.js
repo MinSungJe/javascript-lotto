@@ -1,6 +1,6 @@
 import Lotto from "./Lotto.js";
-import { makeOneLottoArray } from "../utils/utils.js";
 import Constants from "../constant/Constants.js";
+import makeOneLottoArray from "../utils/makeOneLottoArray.js";
 
 class LottoGame {
   constructor(amount) {
@@ -12,7 +12,10 @@ class LottoGame {
       5: 0,
     };
 
-    this.lottos = Array.from({ length: amount }, () => new Lotto(makeOneLottoArray()));
+    this.lottos = Array.from(
+      { length: amount },
+      () => new Lotto(makeOneLottoArray())
+    );
   }
 
   getGameResult() {

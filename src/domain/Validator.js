@@ -15,11 +15,16 @@ class Validator {
       .map((a) => a.trim());
     if (!ListChecker.isDefineLength(targetArray, 6))
       throw new Error(Constants.ERROR.TARGET_NUMBER_LENGTH);
-    if (targetArray.some(num => 
-        !StringChecker.isRegString(num, /^[0-9]+$/) ||
-        NumberChecker.isMoreThan(Number(num), Constants.LOTTO.MAX_NUMBER) ||
-        NumberChecker.isLessThan(Number(num), Constants.LOTTO.MIN_NUMBER)
-    ))
+    if (ListChecker.hasDuplicateValue(targetArray))
+      throw new Error(Constants.ERROR.TARGET_NUMBER_DUPLICATED);
+    if (
+      targetArray.some(
+        (num) =>
+          !StringChecker.isRegString(num, /^[0-9]+$/) ||
+          NumberChecker.isMoreThan(Number(num), Constants.LOTTO.MAX_NUMBER) ||
+          NumberChecker.isLessThan(Number(num), Constants.LOTTO.MIN_NUMBER)
+      )
+    )
       throw new Error(Constants.ERROR.LOTTO_NUMBER_RANGE);
   }
 

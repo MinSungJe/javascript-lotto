@@ -1,7 +1,7 @@
 import Lotto from "../src/domain/Lotto.js";
 import LottoGame from "../src/domain/LottoGame.js";
-import { makeOneLottoArray } from "../src/utils/utils.js";
 import { ListChecker } from "../src/Checkers.js";
+import makeOneLottoArray from "../src/utils/makeOneLottoArray.js";
 
 describe("LottoGame 객체 테스트", () => {
   test("LottoGame은 로또의 결과를 저장할 수 있다.", () => {
@@ -20,7 +20,7 @@ describe("LottoGame 객체 테스트", () => {
     const lottoGame = new LottoGame(amount);
     expect(lottoGame.lottos.length).toBe(3);
     expect(lottoGame.lottos.every((lotto) => lotto instanceof Lotto)).toBe(
-      true,
+      true
     );
   });
 
