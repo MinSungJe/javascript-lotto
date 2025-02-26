@@ -13,13 +13,17 @@
       <h1>🎱 행운의 로또</h1>
       <main class="lotto-app-container">
         <h1 class="lotto-title p-title">🎱 내 번호 당첨 확인 🎱</h1>
+
         <section class="input-box-container">
           <p>구입할 금액을 입력해주세요.</p>
           <div class="input-box">
-            <input placeholder="금액" />
-            <button class="main-btn"><p class="p-caption">구입</p></button>
+            <input id="price" placeholder="금액" />
+            <button id="buy" class="main-btn">
+              <p class="p-caption">구입</p>
+            </button>
           </div>
         </section>
+
         <section class="lotto-container">
           <p>총 7개를 구매하였습니다.</p>
         </section>
@@ -29,21 +33,23 @@
           <div class="winning-lotto">
             <div class="target-number">
               <p>당첨 번호</p>
-              <input class="number-input" />
-              <input class="number-input" />
-              <input class="number-input" />
-              <input class="number-input" />
-              <input class="number-input" />
-              <input class="number-input" />
+              <input id="target" class="number-input" />
+              <input id="target" class="number-input" />
+              <input id="target" class="number-input" />
+              <input id="target" class="number-input" />
+              <input id="target" class="number-input" />
+              <input id="target" class="number-input" />
             </div>
             <div class="bonus-number">
               <p>보너스 번호</p>
-              <input class="number-input" />
+              <input id="bonus" class="number-input" />
             </div>
           </div>
         </section>
 
-        <button class="main-btn"><p class="p-caption">결과 확인하기</p></button>
+        <button id="getResult" class="main-btn">
+          <p class="p-caption">결과 확인하기</p>
+        </button>
       </main>
     </div>
 
@@ -102,6 +108,7 @@
       </div>
     </template>
 
+    <script type="module" src="./src/view/step2/InputView.js"></script>
     <script type="module" src="./src/step2-index.js"></script>
   </body>
 </html>
