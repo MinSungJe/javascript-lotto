@@ -10,6 +10,7 @@ const app = document.querySelector("#app");
 const lottoContainer = app.querySelector(".lotto-container");
 const lottoTicketList = app.querySelector(".lotto-ticket-list");
 
+const headerTitle = app.querySelector("#header-title");
 const buyButton = app.querySelector("#buy");
 const getResultButton = app.querySelector("#getResult");
 
@@ -116,6 +117,10 @@ const addEventRestartButton = () => {
     app.removeChild(resultModal);
   });
 };
+
+headerTitle.addEventListener("click", () => {
+  location.reload();
+});
 
 buyButton.addEventListener("click", () => {
   const priceInputString = app.querySelector("#price").value;
