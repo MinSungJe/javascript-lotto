@@ -12,6 +12,12 @@
   --text-placeholder: 1.5rem;
   --text-caption: 1.4rem;
 }
+
+#app {
+  width: 100vw;
+  height: 100vh;
+}
+
 .p-bold {
   font-weight: 700;
 }
@@ -98,4 +104,45 @@
 
 .bonus-number-container > p {
   margin-bottom: 8px;
+}
+
+.modal-background {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: var(--lotto-greyscale-1, #fff);
+  width: 350px;
+  height: 500px;
+  border-radius: 4px;
+  padding: 40px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.result-table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.result-table thead {
+  font-weight: 700;
+}
+
+.result-table tr {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.result-table td {
+  padding: 8px;
 }
