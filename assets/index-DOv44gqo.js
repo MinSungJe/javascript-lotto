@@ -2,9 +2,11 @@ var __typeError = (msg) => {
   throw TypeError(msg);
 };
 var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot " + msg);
+var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read from private field"), getter ? getter.call(obj) : member.get(obj));
 var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
+var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), setter ? setter.call(obj, value) : member.set(obj, value), value);
 var __privateMethod = (obj, member, method) => (__accessCheck(obj, member, "access private method"), method);
-var _LottoGame_instances, resetResult_fn;
+var _LottoGame_instances, resetResult_fn, _resultModal, _setValue;
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -149,8 +151,8 @@ class LottoGame {
   getWinMoney() {
     return this.result["5"] * Constants.LOTTO.PRIZE.FIFTH + this.result["4"] * Constants.LOTTO.PRIZE.FOURTH + this.result["3"] * Constants.LOTTO.PRIZE.THIRD + this.result["2"] * Constants.LOTTO.PRIZE.SECOND + this.result["1"] * Constants.LOTTO.PRIZE.FIRST;
   }
-  getEarningRate(amount) {
-    const rawEarningRate = this.getWinMoney() / (amount * Constants.LOTTO.UNIT) * 100;
+  getEarningRate() {
+    const rawEarningRate = this.getWinMoney() / (this.lottos.length * Constants.LOTTO.UNIT) * 100;
     return rawEarningRate.toFixed(1);
   }
 }
@@ -232,113 +234,120 @@ class Validator {
       throw new Error(Constants.ERROR.RESTART_STRING);
   }
 }
-const app = document.querySelector("#app");
-const lottoContainer = app.querySelector(".lotto-container");
-const lottoTicketList = app.querySelector(".lotto-ticket-list");
-const buyButton = app.querySelector("#buy");
-const getResultButton = app.querySelector("#getResult");
+class InputChecker {
+  static price(priceInputString) {
+    try {
+      Validator.isPrice(priceInputString);
+      return true;
+    } catch (error) {
+      alert(error.message);
+      return false;
+    }
+  }
+  static numbers(targetNumberString, bonusNumberString) {
+    try {
+      Validator.isTargetNumber(targetNumberString);
+      const targetNumberList = targetNumberString.split(Constants.OPERATOR.SEPARATOR).map((a) => Number(a.trim()));
+      Validator.isBonusNumber(bonusNumberString, targetNumberList);
+      return true;
+    } catch (error) {
+      alert(error.message);
+      return false;
+    }
+  }
+}
+class ResultModal {
+  constructor() {
+    __privateAdd(this, _resultModal);
+    __privateAdd(this, _setValue, (gameResult, earningRate) => {
+      __privateGet(this, _resultModal).querySelector(
+        "#fifth-count"
+      ).textContent = `${gameResult["5"]}개`;
+      __privateGet(this, _resultModal).querySelector(
+        "#fourth-count"
+      ).textContent = `${gameResult["4"]}개`;
+      __privateGet(this, _resultModal).querySelector(
+        "#third-count"
+      ).textContent = `${gameResult["3"]}개`;
+      __privateGet(this, _resultModal).querySelector(
+        "#second-count"
+      ).textContent = `${gameResult["2"]}개`;
+      __privateGet(this, _resultModal).querySelector(
+        "#first-count"
+      ).textContent = `${gameResult["1"]}개`;
+      __privateGet(this, _resultModal).querySelector(
+        "#earning-rate"
+      ).textContent = `당신의 총 수익률은 ${earningRate}%입니다.`;
+    });
+    __privateSet(this, _resultModal, app.querySelector(".modal-background"));
+  }
+  show(gameResult, earningRate) {
+    __privateGet(this, _setValue).call(this, gameResult, earningRate);
+    __privateGet(this, _resultModal).style.visibility = "visible";
+  }
+  close() {
+    __privateGet(this, _resultModal).style.visibility = "hidden";
+  }
+}
+_resultModal = new WeakMap();
+_setValue = new WeakMap();
+const app$1 = document.querySelector("#app");
+const lottoContainer = app$1.querySelector(".lotto-container");
+const lottoTicketList = app$1.querySelector("#lotto-ticket-list");
+const headerTitle = app$1.querySelector("#header-title");
+const buyButton = app$1.querySelector("#buy");
+const getResultButton = app$1.querySelector("#getResult");
+const restartButton = app$1.querySelector("#restart");
+const closeButton = app$1.querySelector("#close");
 const lottoTicketTemplate = document.querySelector("#lotto-ticket");
-const resultModalTemplate = document.querySelector("#result-modal");
-let lottoNum;
+const resultModal = new ResultModal();
 let lottoGame;
-const checkCanPriceInput = (priceInputString) => {
-  try {
-    Validator.isPrice(priceInputString);
-    return true;
-  } catch (error) {
-    alert(error.message);
-    return false;
-  }
-};
-const checkCanNumberInput = (targetNumberString, bonusNumberString) => {
-  try {
-    Validator.isTargetNumber(targetNumberString);
-    const targetNumberList = targetNumberString.split(Constants.OPERATOR.SEPARATOR).map((a) => Number(a.trim()));
-    Validator.isBonusNumber(bonusNumberString, targetNumberList);
-    return true;
-  } catch (error) {
-    alert(error.message);
-    return false;
-  }
-};
-const displayLotto = (lottoNum2) => {
-  lottoGame = new LottoGame(lottoNum2);
+headerTitle.addEventListener("click", () => {
+  location.reload();
+});
+buyButton.addEventListener("click", () => {
+  const priceInputString = app$1.querySelector("#price").value;
+  if (!InputChecker.price(priceInputString)) return;
+  const lottoNum = Number(priceInputString) / Constants.LOTTO.UNIT;
+  lottoGame = new LottoGame(lottoNum);
   lottoContainer.querySelector(
     "#lotto-status"
-  ).textContent = `총 ${lottoNum2}개를 구매하였습니다.`;
+  ).textContent = `총 ${lottoNum}개를 구매하였습니다.`;
   lottoTicketList.replaceChildren();
   lottoGame.lottos.forEach((lotto) => {
     const lottoTicketClone = lottoTicketTemplate.content.cloneNode(true);
-    lottoTicketClone.querySelector(".lotto-ticket-number").textContent = lotto.getLottoNumber().join(", ");
+    lottoTicketClone.querySelector("#lotto-ticket-number").textContent = lotto.getLottoNumber().join(", ");
     lottoTicketList.appendChild(lottoTicketClone);
   });
-};
-const displayResult = (gameResult, earningRate) => {
-  const resultModalClone = resultModalTemplate.content.cloneNode(true);
-  resultModalClone.querySelector(
-    "#fifth-count"
-  ).textContent = `${gameResult["5"]}개`;
-  resultModalClone.querySelector(
-    "#fourth-count"
-  ).textContent = `${gameResult["4"]}개`;
-  resultModalClone.querySelector(
-    "#third-count"
-  ).textContent = `${gameResult["3"]}개`;
-  resultModalClone.querySelector(
-    "#second-count"
-  ).textContent = `${gameResult["2"]}개`;
-  resultModalClone.querySelector(
-    "#first-count"
-  ).textContent = `${gameResult["1"]}개`;
-  resultModalClone.querySelector(
-    "#earning-rate"
-  ).textContent = `당신의 총 수익률은 ${earningRate}%입니다.`;
-  app.prepend(resultModalClone);
-  addEventCloseButton();
-  addEventRestartButton();
-};
-const addEventCloseButton = () => {
-  const closeButton = app.querySelector("#close");
-  const resultModal = app.querySelector(".modal-background");
-  closeButton.addEventListener("click", () => {
-    app.removeChild(resultModal);
-  });
-};
-const addEventRestartButton = () => {
-  const restartButton = app.querySelector("#restart");
-  const resultModal = app.querySelector(".modal-background");
-  const priceInput = app.querySelector("#price");
-  const targetNumberInputList = app.querySelectorAll("#target");
-  const bonusNumberInput = app.querySelector("#bonus");
-  restartButton.addEventListener("click", () => {
-    lottoGame = void 0;
-    lottoContainer.querySelector("#lotto-status").textContent = "아직 로또를 구매하지 않았습니다!";
-    lottoTicketList.replaceChildren();
-    priceInput.value = "";
-    targetNumberInputList.forEach(
-      (targetNumberInput) => targetNumberInput.value = ""
-    );
-    bonusNumberInput.value = "";
-    app.removeChild(resultModal);
-  });
-};
-buyButton.addEventListener("click", () => {
-  const priceInputString = app.querySelector("#price").value;
-  if (!checkCanPriceInput(priceInputString)) return;
-  lottoNum = Number(priceInputString) / Constants.LOTTO.UNIT;
-  displayLotto(lottoNum);
 });
 getResultButton.addEventListener("click", () => {
   if (lottoGame === void 0) {
     alert(Constants.ERROR.NO_LOTTO);
     return;
   }
-  const targetNumberInputList = app.querySelectorAll("#target");
+  const targetNumberInputList = app$1.querySelectorAll("#target");
   const targetNumberString = [...targetNumberInputList].map((targetNumberInput) => targetNumberInput.value).join(Constants.OPERATOR.SEPARATOR);
-  const bonusNumberString = app.querySelector("#bonus").value;
-  if (!checkCanNumberInput(targetNumberString, bonusNumberString)) return;
+  const bonusNumberString = app$1.querySelector("#bonus").value;
+  if (!InputChecker.numbers(targetNumberString, bonusNumberString)) return;
   const targetNumber = targetNumberString.split(Constants.OPERATOR.SEPARATOR).map((a) => Number(a.trim()));
   const bonusNumber = Number(bonusNumberString);
   lottoGame.calculate(targetNumber, bonusNumber);
-  displayResult(lottoGame.getGameResult(), lottoGame.getEarningRate(lottoNum));
+  resultModal.show(lottoGame.getGameResult(), lottoGame.getEarningRate());
+});
+closeButton.addEventListener("click", () => {
+  resultModal.close();
+});
+restartButton.addEventListener("click", () => {
+  const priceInput = app$1.querySelector("#price");
+  const targetNumberInputList = app$1.querySelectorAll("#target");
+  const bonusNumberInput = app$1.querySelector("#bonus");
+  lottoGame = void 0;
+  lottoContainer.querySelector("#lotto-status").textContent = "아직 로또를 구매하지 않았습니다!";
+  lottoTicketList.replaceChildren();
+  priceInput.value = "";
+  targetNumberInputList.forEach(
+    (targetNumberInput) => targetNumberInput.value = ""
+  );
+  bonusNumberInput.value = "";
+  resultModal.close();
 });
