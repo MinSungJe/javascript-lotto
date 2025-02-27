@@ -1,4 +1,4 @@
-import { ListChecker, NumberChecker, StringChecker } from "../Checkers.js";
+import { ListChecker, NumberChecker, StringChecker } from "./Checkers.js";
 import Constants from "../constant/Constants.js";
 
 class Validator {

@@ -1,6 +1,6 @@
 import Lotto from "../src/domain/Lotto.js";
 import LottoGame from "../src/domain/LottoGame.js";
-import { ListChecker } from "../src/Checkers.js";
+import { ListChecker } from "../src/domain/Checkers.js";
 import makeOneLottoArray from "../src/utils/makeOneLottoArray.js";
 
 describe("LottoGame 객체 테스트", () => {

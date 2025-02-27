@@ -1,6 +1,6 @@
 import readline from "readline";
 
-export async function readLineAsync(query) {
+async function readLineAsync(query) {
   return new Promise((resolve, reject) => {
     if (arguments.length !== 1) {
       reject(new Error("arguments must be 1"));
@@ -22,6 +22,4 @@ export async function readLineAsync(query) {
   });
 }
 
-export function getLottoAmount(price) {
-  return price / 1000;
-}
+export default readLineAsync;

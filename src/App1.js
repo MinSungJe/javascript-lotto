@@ -1,9 +1,9 @@
 import LottoGame from "./domain/LottoGame.js";
 import Validator from "./domain/Validator.js";
-import InputView from "./view/InputView.js";
-import OutputView from "./view/OutputView.js";
 import loopWhileValid from "./utils/loopWhileValid.js";
 import Constants from "./constant/Constants.js";
+import InputView from "./view/step1/InputView.js";
+import OutputView from "./view/step1/OutputView.js";
 
 class App1 {
   async run() {

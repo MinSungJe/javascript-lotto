@@ -1,4 +1,8 @@
-import { ListChecker, NumberChecker, StringChecker } from "../src/Checkers.js";
+import {
+  ListChecker,
+  NumberChecker,
+  StringChecker,
+} from "../src/domain/Checkers.js";
 
 describe("StringChecker 테스트", () => {
   test("String이 주어졌을 때 정규식에 만족하는 지 검사한다.", () => {
@@ -16,7 +20,7 @@ describe("StringChecker 테스트", () => {
 
     expect(StringChecker.isExactString(TRUE_STRING, VALUE)).toBeTruthy();
     expect(StringChecker.isExactString(FALSE_STRING, VALUE)).toBeFalsy();
-  })
+  });
 });
 
 describe("NumberChecker 테스트", () => {
@@ -41,9 +45,9 @@ describe("NumberChecker 테스트", () => {
     const FALSE_NUMBER = 1;
     const UNIT = 1000;
 
-    expect(NumberChecker.isUnitNumber(TRUE_NUMBER, UNIT)).toBeTruthy()
-    expect(NumberChecker.isUnitNumber(FALSE_NUMBER, UNIT)).toBeFalsy()
-  })
+    expect(NumberChecker.isUnitNumber(TRUE_NUMBER, UNIT)).toBeTruthy();
+    expect(NumberChecker.isUnitNumber(FALSE_NUMBER, UNIT)).toBeFalsy();
+  });
 });
 
 describe("ListChecker 테스트", () => {
@@ -59,25 +63,24 @@ describe("ListChecker 테스트", () => {
     const TRUE_LIST = [1, 1, 3, 4];
     const FALSE_LIST = [1, 2, 3, 4];
 
-    expect(ListChecker.hasDuplicateValue(TRUE_LIST)).toBeTruthy()
-    expect(ListChecker.hasDuplicateValue(FALSE_LIST)).toBeFalsy()
-  })
+    expect(ListChecker.hasDuplicateValue(TRUE_LIST)).toBeTruthy();
+    expect(ListChecker.hasDuplicateValue(FALSE_LIST)).toBeFalsy();
+  });
 
   test("List를 받았을 때 그 안의 값이 오름차순으로 정렬되었는지 검사한다.", () => {
-    const TRUE_LIST = [1,2,3]
-    const FALSE_LIST = [3,2,1]
+    const TRUE_LIST = [1, 2, 3];
+    const FALSE_LIST = [3, 2, 1];
 
-    expect(ListChecker.isUphillList(TRUE_LIST)).toBeTruthy()
-    expect(ListChecker.isUphillList(FALSE_LIST)).toBeFalsy()
-  })
+    expect(ListChecker.isUphillList(TRUE_LIST)).toBeTruthy();
+    expect(ListChecker.isUphillList(FALSE_LIST)).toBeFalsy();
+  });
 
-  test('List와 값를 받았을때 그 안에 값이 있는지 검사한다.', () => {
-    const LIST = [1,2,3];
+  test("List와 값를 받았을때 그 안에 값이 있는지 검사한다.", () => {
+    const LIST = [1, 2, 3];
     const TRUE_VALUE = 1;
     const FALSE_VALUE = 4;
 
     expect(ListChecker.includeValue(LIST, TRUE_VALUE)).toBeTruthy();
     expect(ListChecker.includeValue(LIST, FALSE_VALUE)).toBeFalsy();
-
   });
 });

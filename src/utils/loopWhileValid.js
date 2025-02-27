@@ -1,4 +1,4 @@
-import OutputView from "../view/OutputView.js";
+import OutputView from "../view/step1/OutputView.js";
 
 async function loopWhileValid(fn, ...args) {
   try {
