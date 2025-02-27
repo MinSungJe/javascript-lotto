@@ -27,7 +27,7 @@ class App1 {
 
     OutputView.printWinning(
       lottoGame.getGameResult(),
-      lottoGame.getEarningRate(lottoNum)
+      lottoGame.getEarningRate()
     );
 
     OutputView.printBlank();

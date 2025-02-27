@@ -60,9 +60,9 @@ class LottoGame {
     );
   }
 
-  getEarningRate(amount) {
+  getEarningRate() {
     const rawEarningRate =
-      (this.getWinMoney() / (amount * Constants.LOTTO.UNIT)) * 100;
+      (this.getWinMoney() / (this.lottos.length * Constants.LOTTO.UNIT)) * 100;
     return rawEarningRate.toFixed(1);
   }
 }
