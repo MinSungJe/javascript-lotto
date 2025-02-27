@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <title>🎱 행운의 로또</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="main.css" />
   </head>
 
@@ -13,6 +12,7 @@
       <header>
         <h1 id="header-title" class="p-title">🎱 행운의 로또</h1>
       </header>
+
       <main class="lotto-app-container">
         <h1 class="lotto-title p-title">🎱 내 번호 당첨 확인 🎱</h1>
 
@@ -28,7 +28,7 @@
 
         <section class="lotto-container">
           <p id="lotto-status">아직 로또를 구매하지 않았습니다!</p>
-          <div class="lotto-ticket-list"></div>
+          <div id="lotto-ticket-list"></div>
         </section>
 
         <section class="winning-lotto-container">
@@ -63,7 +63,7 @@
     <template id="lotto-ticket">
       <div class="lotto-ticket-container">
         <p class="p-icon">🎟️</p>
-        <p class="lotto-ticket-number">12, 28, 22, 37, 19, 23</p>
+        <p id="lotto-ticket-number">12, 28, 22, 37, 19, 23</p>
       </div>
     </template>
 

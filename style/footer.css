@@ -1,0 +1,8 @@
+footer {
+  width: 100%;
+  height: 80px;
+  border-top: 1px solid rgba(78, 91, 166, 0.2);
+  padding: 28px;
+  color: var(--lotto-primary, #4e5ba6);
+  text-align: center;
+}

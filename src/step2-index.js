@@ -8,7 +8,7 @@ import Validator from "./domain/Validator.js";
 
 const app = document.querySelector("#app");
 const lottoContainer = app.querySelector(".lotto-container");
-const lottoTicketList = app.querySelector(".lotto-ticket-list");
+const lottoTicketList = app.querySelector("#lotto-ticket-list");
 
 const headerTitle = app.querySelector("#header-title");
 const buyButton = app.querySelector("#buy");
@@ -56,7 +56,7 @@ const displayLotto = (lottoNum) => {
   lottoTicketList.replaceChildren();
   lottoGame.lottos.forEach((lotto) => {
     const lottoTicketClone = lottoTicketTemplate.content.cloneNode(true);
-    lottoTicketClone.querySelector(".lotto-ticket-number").textContent = lotto
+    lottoTicketClone.querySelector("#lotto-ticket-number").textContent = lotto
       .getLottoNumber()
       .join(", ");
     lottoTicketList.appendChild(lottoTicketClone);

@@ -1,0 +1,18 @@
+.main-btn {
+  cursor: pointer;
+  width: 100%;
+  padding: 6px 6px 6px 8px;
+  border-radius: 4px;
+  background-color: var(--lotto-primary);
+  color: var(--lotto-greyscale-1, #fff);
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.main-btn p {
+  padding: 4px 6px;
+}
+
+.main-btn:hover {
+  background-color: var(--lotto-primary-dark);
+}

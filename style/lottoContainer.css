@@ -1,0 +1,14 @@
+.lotto-container {
+  height: 320px;
+  overflow-y: auto;
+}
+
+.lotto-ticket-container {
+  display: flex;
+  align-items: center;
+}
+
+#lotto-container {
+  height: 320px;
+  overflow-y: auto;
+}
