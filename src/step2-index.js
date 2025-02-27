@@ -5,17 +5,19 @@
 import Constants from "./constant/Constants.js";
 import LottoGame from "./domain/LottoGame.js";
 import InputChecker from "./view/step2/InputChecker.js";
+import ResultModal from "./view/step2/ResultModal.js";
 
 const app = document.querySelector("#app");
 const lottoContainer = app.querySelector(".lotto-container");
 const lottoTicketList = app.querySelector("#lotto-ticket-list");
-const resultModal = app.querySelector(".modal-background");
 
 const headerTitle = app.querySelector("#header-title");
 const buyButton = app.querySelector("#buy");
 const getResultButton = app.querySelector("#getResult");
 const restartButton = app.querySelector("#restart");
 const closeButton = app.querySelector("#close");
+
+const resultModal = new ResultModal();
 
 const lottoTicketTemplate = document.querySelector("#lotto-ticket");
 
@@ -35,32 +37,6 @@ const createLottos = (lottoNum) => {
       .join(", ");
     lottoTicketList.appendChild(lottoTicketClone);
   });
-};
-
-const displayResultModal = (gameResult, earningRate) => {
-  setResultModalValue(gameResult, earningRate);
-  resultModal.style.visibility = "visible";
-};
-
-const setResultModalValue = (gameResult, earningRate) => {
-  resultModal.querySelector(
-    "#fifth-count"
-  ).textContent = `${gameResult["5"]}개`;
-  resultModal.querySelector(
-    "#fourth-count"
-  ).textContent = `${gameResult["4"]}개`;
-  resultModal.querySelector(
-    "#third-count"
-  ).textContent = `${gameResult["3"]}개`;
-  resultModal.querySelector(
-    "#second-count"
-  ).textContent = `${gameResult["2"]}개`;
-  resultModal.querySelector(
-    "#first-count"
-  ).textContent = `${gameResult["1"]}개`;
-  resultModal.querySelector(
-    "#earning-rate"
-  ).textContent = `당신의 총 수익률은 ${earningRate}%입니다.`;
 };
 
 headerTitle.addEventListener("click", () => {
@@ -94,11 +70,11 @@ getResultButton.addEventListener("click", () => {
   const bonusNumber = Number(bonusNumberString);
   lottoGame.calculate(targetNumber, bonusNumber);
 
-  displayResultModal(lottoGame.getGameResult(), lottoGame.getEarningRate());
+  resultModal.show(lottoGame.getGameResult(), lottoGame.getEarningRate());
 });
 
 closeButton.addEventListener("click", () => {
-  resultModal.style.visibility = "hidden";
+  resultModal.close();
 });
 
 restartButton.addEventListener("click", () => {
@@ -115,5 +91,5 @@ restartButton.addEventListener("click", () => {
     (targetNumberInput) => (targetNumberInput.value = "")
   );
   bonusNumberInput.value = "";
-  resultModal.style.visibility = "hidden";
+  resultModal.close();
 });
