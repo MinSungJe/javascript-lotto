@@ -17,13 +17,20 @@ const getResultButton = app.querySelector("#getResult");
 const restartButton = app.querySelector("#restart");
 const closeButton = app.querySelector("#close");
 
-const resultModal = new ResultModal();
-
 const lottoTicketTemplate = document.querySelector("#lotto-ticket");
+const resultModal = new ResultModal();
 
 let lottoGame;
 
-const createLottos = (lottoNum) => {
+headerTitle.addEventListener("click", () => {
+  location.reload();
+});
+
+buyButton.addEventListener("click", () => {
+  const priceInputString = app.querySelector("#price").value;
+  if (!InputChecker.price(priceInputString)) return;
+  const lottoNum = Number(priceInputString) / Constants.LOTTO.UNIT;
+
   lottoGame = new LottoGame(lottoNum);
   lottoContainer.querySelector(
     "#lotto-status"
@@ -37,17 +44,6 @@ const createLottos = (lottoNum) => {
       .join(", ");
     lottoTicketList.appendChild(lottoTicketClone);
   });
-};
-
-headerTitle.addEventListener("click", () => {
-  location.reload();
-});
-
-buyButton.addEventListener("click", () => {
-  const priceInputString = app.querySelector("#price").value;
-  if (!InputChecker.price(priceInputString)) return;
-  const lottoNum = Number(priceInputString) / Constants.LOTTO.UNIT;
-  createLottos(lottoNum);
 });
 
 getResultButton.addEventListener("click", () => {
