@@ -5,7 +5,7 @@ import OutputView from "./view/OutputView.js";
 import loopWhileValid from "./utils/loopWhileValid.js";
 import Constants from "./constant/Constants.js";
 
-class App {
+class App1 {
   async run() {
     const lottoNum = await loopWhileValid(this.#getLottoNum);
     const lottoGame = new LottoGame(lottoNum);
@@ -20,14 +20,14 @@ class App {
     OutputView.printBlank();
     const bonusNumber = await loopWhileValid(
       this.#getBonusNumber,
-      targetNumber,
+      targetNumber
     );
 
     lottoGame.calculate(targetNumber, bonusNumber);
 
     OutputView.printWinning(
       lottoGame.getGameResult(),
-      lottoGame.getEarningRate(lottoNum),
+      lottoGame.getEarningRate(lottoNum)
     );
 
     OutputView.printBlank();
@@ -44,7 +44,7 @@ class App {
 
   async #getTargetNumber() {
     const targetNumber = await InputView.getInput(
-      Constants.MESSAGE.TARGET_NUMBER,
+      Constants.MESSAGE.TARGET_NUMBER
     );
     Validator.isTargetNumber(targetNumber);
     const targetNumberList = targetNumber
@@ -55,7 +55,7 @@ class App {
 
   async #getBonusNumber(targetNumber) {
     const bonusNumber = await InputView.getInput(
-      Constants.MESSAGE.BONUS_NUMBER,
+      Constants.MESSAGE.BONUS_NUMBER
     );
     Validator.isBonusNumber(bonusNumber, targetNumber);
     return Number(bonusNumber);
@@ -63,11 +63,11 @@ class App {
 
   async #getRestartString() {
     const retryAnswer = await InputView.getInput(
-      Constants.MESSAGE.RESTART_STRING,
+      Constants.MESSAGE.RESTART_STRING
     );
     Validator.isRestartString(retryAnswer);
     return retryAnswer;
   }
 }
 
-export default App;
+export default App1;
