@@ -111,3 +111,7 @@
 **Header, Footer 구현**
 
 - 전체 화면의 Header와 Footer를 구현한다.
+
+**리팩토링**
+
+- JS, CSS 파일의 코드 분리
