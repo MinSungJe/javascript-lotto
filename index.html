@@ -9,6 +9,53 @@
 
   <body class="p-body">
     <div id="app">
+      <section class="modal-background">
+        <section class="modal-box">
+          <button id="close" class="close-btn"></button>
+          <h2 class="p-subtitle">🏆 당첨 통계 🏆</h2>
+          <table class="result-table">
+            <thead>
+              <tr>
+                <td>일치 갯수</td>
+                <td>당첨금</td>
+                <td>당첨 갯수</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>3개</td>
+                <td>5,000</td>
+                <td id="fifth-count">n개</td>
+              </tr>
+              <tr>
+                <td>4개</td>
+                <td>50,000</td>
+                <td id="fourth-count">n개</td>
+              </tr>
+              <tr>
+                <td>5개</td>
+                <td>1,500,000</td>
+                <td id="third-count">n개</td>
+              </tr>
+              <tr>
+                <td>5개+보너스볼</td>
+                <td>30,000,000</td>
+                <td id="second-count">n개</td>
+              </tr>
+              <tr>
+                <td>6개</td>
+                <td>2,000,000,000</td>
+                <td id="first-count">n개</td>
+              </tr>
+            </tbody>
+          </table>
+          <p id="earning-rate" class="p-bold">당신의 총 수익률은 %입니다.</p>
+          <button class="main-btn">
+            <p id="restart" class="p-caption">다시 시작하기</p>
+          </button>
+        </section>
+      </section>
+
       <header>
         <h1 id="header-title" class="p-title">🎱 행운의 로또</h1>
       </header>
@@ -64,55 +111,6 @@
       <div class="lotto-ticket-container">
         <p class="p-icon">🎟️</p>
         <p id="lotto-ticket-number">12, 28, 22, 37, 19, 23</p>
-      </div>
-    </template>
-
-    <template id="result-modal">
-      <div class="modal-background">
-        <section class="modal-box">
-          <button id="close" class="close-btn"></button>
-          <h2 class="p-subtitle">🏆 당첨 통계 🏆</h2>
-          <table class="result-table">
-            <thead>
-              <tr>
-                <td>일치 갯수</td>
-                <td>당첨금</td>
-                <td>당첨 갯수</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>3개</td>
-                <td>5,000</td>
-                <td id="fifth-count">n개</td>
-              </tr>
-              <tr>
-                <td>4개</td>
-                <td>50,000</td>
-                <td id="fourth-count">n개</td>
-              </tr>
-              <tr>
-                <td>5개</td>
-                <td>1,500,000</td>
-                <td id="third-count">n개</td>
-              </tr>
-              <tr>
-                <td>5개+보너스볼</td>
-                <td>30,000,000</td>
-                <td id="second-count">n개</td>
-              </tr>
-              <tr>
-                <td>6개</td>
-                <td>2,000,000,000</td>
-                <td id="first-count">n개</td>
-              </tr>
-            </tbody>
-          </table>
-          <p id="earning-rate" class="p-bold">당신의 총 수익률은 %입니다.</p>
-          <button class="main-btn">
-            <p id="restart" class="p-caption">다시 시작하기</p>
-          </button>
-        </section>
       </div>
     </template>
 
