@@ -4,10 +4,7 @@
  */
 import Constants from "./constant/Constants.js";
 import LottoGame from "./domain/LottoGame.js";
-import {
-  checkCanNumberInput,
-  checkCanPriceInput,
-} from "./view/step2/InputChecker.js";
+import InputChecker from "./view/step2/InputChecker.js";
 
 const app = document.querySelector("#app");
 const lottoContainer = app.querySelector(".lotto-container");
@@ -72,7 +69,7 @@ headerTitle.addEventListener("click", () => {
 
 buyButton.addEventListener("click", () => {
   const priceInputString = app.querySelector("#price").value;
-  if (!checkCanPriceInput(priceInputString)) return;
+  if (!InputChecker.price(priceInputString)) return;
   const lottoNum = Number(priceInputString) / Constants.LOTTO.UNIT;
   createLottos(lottoNum);
 });
@@ -89,7 +86,7 @@ getResultButton.addEventListener("click", () => {
     .join(Constants.OPERATOR.SEPARATOR);
   const bonusNumberString = app.querySelector("#bonus").value;
 
-  if (!checkCanNumberInput(targetNumberString, bonusNumberString)) return;
+  if (!InputChecker.numbers(targetNumberString, bonusNumberString)) return;
 
   const targetNumber = targetNumberString
     .split(Constants.OPERATOR.SEPARATOR)
