@@ -5,7 +5,7 @@ import Constants from "./constant/Constants.js";
 import InputView from "./view/step1/InputView.js";
 import OutputView from "./view/step1/OutputView.js";
 
-class App1 {
+class App {
   async run() {
     const lottoNum = await loopWhileValid(this.#getLottoNum);
     const lottoGame = new LottoGame(lottoNum);
@@ -70,4 +70,4 @@ class App1 {
   }
 }
 
-export default App1;
+export default App;
