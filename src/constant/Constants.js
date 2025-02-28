@@ -4,6 +4,7 @@ const Constants = Object.freeze({
     NUMBER_LENGTH: 6,
     MAX_NUMBER: 45,
     MIN_NUMBER: 1,
+    MAX_PRICE: 100_000,
     CORRECT_NUMBER: {
       FIRST: 6,
       SECOND: 5,
@@ -32,6 +33,7 @@ const Constants = Object.freeze({
     NO_LOTTO: "[ERROR] 로또를 구매하지 않으셨습니다!",
     PRICE_TYPE: "[ERROR] 금액은 숫자로 입력해야 한다.",
     PRICE_UNIT: "[ERROR] 금액은 1,000원으로 나누어 떨어져야 한다.",
+    PRICE_OVER: "[ERROR] 금액은 100,000원 이상 구매할 수 없다.",
     TARGET_NUMBER_LENGTH: "[ERROR] 당첨번호는 쉼표로 구분되어야 한다.",
     TARGET_NUMBER_DUPLICATED: "[ERROR] 당첨번호는 중복되는 값을 가질 수 없다.",
     LOTTO_NUMBER_RANGE: "[ERROR] 당첨번호는 1~45 사이의 숫자이어야한다.",
