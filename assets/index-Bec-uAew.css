@@ -168,7 +168,7 @@ footer {
   height: 14px;
   border: none;
   background: none;
-  background-image: url("./src/assets/x-mark.svg");
+  background-image: url("./x-mark.svg");
   background-size: cover;
 }
 
