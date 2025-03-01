@@ -2,7 +2,9 @@
 @import "./style/header.css";
 @import "./style/footer.css";
 @import "./style/mainBtn.css";
-@import "./style/inputBoxContainer.css";
+
+@import "./src/components/PriceInputForm/elements.css";
+
 @import "./style/lottoContainer.css";
 @import "./style/winningLottoContainer.css";
 @import "./style/resultModal.css";
