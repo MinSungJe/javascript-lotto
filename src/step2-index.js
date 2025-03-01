@@ -2,6 +2,8 @@
  * step 2의 시작점이 되는 파일입니다.
  * 노드 환경에서 사용하는 readline 등을 불러올 경우 정상적으로 빌드할 수 없습니다.
  */
+import PriceInputForm from "./components/PriceInputForm/PriceInputForm.js";
+import state from "./components/state.js";
 import Constants from "./constant/Constants.js";
 import LottoGame from "./domain/LottoGame.js";
 import InputChecker from "./view/step2/InputChecker.js";
@@ -20,18 +22,20 @@ const closeButton = app.querySelector("#close");
 const lottoTicketTemplate = document.querySelector("#lotto-ticket");
 const resultModal = new ResultModal();
 
-let lottoGame;
+let lottoGame = state.lottoGame;
 
 headerTitle.addEventListener("click", () => {
   location.reload();
 });
 
-buyButton.addEventListener("click", () => {
-  const priceInputString = app.querySelector("#price").value;
-  if (!InputChecker.price(priceInputString)) return;
-  const lottoNum = Number(priceInputString) / Constants.LOTTO.UNIT;
+PriceInputForm.init();
+
+PriceInputForm.onPriceSubmit = (price) => {
+  const lottoNum = Number(price) / Constants.LOTTO.UNIT;
 
   lottoGame = new LottoGame(lottoNum);
+
+  // 이 뒤부터는 밍고가 한번 구현해보시는 것을 추천합니다.
   lottoContainer.querySelector(
     "#lotto-status"
   ).textContent = `총 ${lottoNum}개를 구매하였습니다.`;
@@ -44,7 +48,7 @@ buyButton.addEventListener("click", () => {
       .join(", ");
     lottoTicketList.appendChild(lottoTicketClone);
   });
-});
+};
 
 getResultButton.addEventListener("click", () => {
   if (lottoGame === undefined) {
@@ -74,7 +78,8 @@ closeButton.addEventListener("click", () => {
 });
 
 restartButton.addEventListener("click", () => {
-  const priceInput = app.querySelector("#price");
+  PriceInputForm.reset();
+
   const targetNumberInputList = app.querySelectorAll("#target");
   const bonusNumberInput = app.querySelector("#bonus");
 
@@ -82,7 +87,6 @@ restartButton.addEventListener("click", () => {
   lottoContainer.querySelector("#lotto-status").textContent =
     "아직 로또를 구매하지 않았습니다!";
   lottoTicketList.replaceChildren();
-  priceInput.value = "";
   targetNumberInputList.forEach(
     (targetNumberInput) => (targetNumberInput.value = "")
   );
