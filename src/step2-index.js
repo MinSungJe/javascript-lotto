@@ -8,17 +8,14 @@ import state from "./components/state.js";
 import WinningLottoInputForm from "./components/WinningLottoInputForm/WinningLottoInputForm.js";
 import Constants from "./constant/Constants.js";
 import LottoGame from "./domain/LottoGame.js";
-import ResultModal from "./view/step2/ResultModal.js";
+import ResultModal from "./components/ResultModal/ResultModal.js";
+import { restartButton } from "./components/ResultModal/elements.js";
 
 const app = document.querySelector("#app");
 const lottoContainer = app.querySelector(".lotto-container");
 const lottoTicketList = app.querySelector("#lotto-ticket-list");
 
 const headerTitle = app.querySelector("#header-title");
-const restartButton = app.querySelector("#restart");
-const closeButton = app.querySelector("#close");
-
-const resultModal = new ResultModal();
 
 headerTitle.addEventListener("click", () => {
   location.reload();
@@ -44,15 +41,14 @@ WinningLottoInputForm.onSubmitNumbers = (
   const bonusNumber = Number(bonusNumberString);
 
   state.lottoGame.calculate(targetNumber, bonusNumber);
-  resultModal.show(
+  ResultModal.setValue(
     state.lottoGame.getGameResult(),
     state.lottoGame.getEarningRate()
   );
+  ResultModal.show();
 };
 
-closeButton.addEventListener("click", () => {
-  resultModal.close();
-});
+ResultModal.init();
 
 restartButton.addEventListener("click", () => {
   const priceInput = app.querySelector("#price");
