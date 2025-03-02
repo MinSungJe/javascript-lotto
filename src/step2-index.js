@@ -2,6 +2,7 @@
  * step 2의 시작점이 되는 파일입니다.
  * 노드 환경에서 사용하는 readline 등을 불러올 경우 정상적으로 빌드할 수 없습니다.
  */
+import LottoListDisplay from "./components/LottoListDisplay/LottoListDisplay.js";
 import PriceInputForm from "./components/PriceInputForm/PriceInputForm.js";
 import state from "./components/state.js";
 import Constants from "./constant/Constants.js";
@@ -18,7 +19,6 @@ const getResultButton = app.querySelector("#getResult");
 const restartButton = app.querySelector("#restart");
 const closeButton = app.querySelector("#close");
 
-const lottoTicketTemplate = document.querySelector("#lotto-ticket");
 const resultModal = new ResultModal();
 
 let lottoGame = state.lottoGame;
@@ -30,20 +30,10 @@ headerTitle.addEventListener("click", () => {
 PriceInputForm.init();
 PriceInputForm.onPriceSubmit = (priceInputString) => {
   const lottoNum = Number(priceInputString) / Constants.LOTTO.UNIT;
-  lottoGame = new LottoGame(lottoNum);
+  state.lottoGame = new LottoGame(lottoNum);
 
-  lottoContainer.querySelector(
-    "#lotto-status"
-  ).textContent = `총 ${lottoNum}개를 구매하였습니다.`;
-
-  lottoTicketList.replaceChildren();
-  lottoGame.lottos.forEach((lotto) => {
-    const lottoTicketClone = lottoTicketTemplate.content.cloneNode(true);
-    lottoTicketClone.querySelector("#lotto-ticket-number").textContent = lotto
-      .getLottoNumber()
-      .join(", ");
-    lottoTicketList.appendChild(lottoTicketClone);
-  });
+  LottoListDisplay.showLottoAmount(lottoNum);
+  LottoListDisplay.showLottoListDisplay();
 };
 
 getResultButton.addEventListener("click", () => {
