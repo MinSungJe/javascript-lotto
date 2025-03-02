@@ -2,6 +2,8 @@
  * step 2의 시작점이 되는 파일입니다.
  * 노드 환경에서 사용하는 readline 등을 불러올 경우 정상적으로 빌드할 수 없습니다.
  */
+import PriceInputForm from "./components/PriceInputForm/PriceInputForm.js";
+import state from "./components/state.js";
 import Constants from "./constant/Constants.js";
 import LottoGame from "./domain/LottoGame.js";
 import InputChecker from "./view/step2/InputChecker.js";
@@ -12,7 +14,6 @@ const lottoContainer = app.querySelector(".lotto-container");
 const lottoTicketList = app.querySelector("#lotto-ticket-list");
 
 const headerTitle = app.querySelector("#header-title");
-const buyButton = app.querySelector("#buy");
 const getResultButton = app.querySelector("#getResult");
 const restartButton = app.querySelector("#restart");
 const closeButton = app.querySelector("#close");
@@ -20,18 +21,17 @@ const closeButton = app.querySelector("#close");
 const lottoTicketTemplate = document.querySelector("#lotto-ticket");
 const resultModal = new ResultModal();
 
-let lottoGame;
+let lottoGame = state.lottoGame;
 
 headerTitle.addEventListener("click", () => {
   location.reload();
 });
 
-buyButton.addEventListener("click", () => {
-  const priceInputString = app.querySelector("#price").value;
-  if (!InputChecker.price(priceInputString)) return;
+PriceInputForm.init();
+PriceInputForm.onPriceSubmit = (priceInputString) => {
   const lottoNum = Number(priceInputString) / Constants.LOTTO.UNIT;
-
   lottoGame = new LottoGame(lottoNum);
+
   lottoContainer.querySelector(
     "#lotto-status"
   ).textContent = `총 ${lottoNum}개를 구매하였습니다.`;
@@ -44,7 +44,7 @@ buyButton.addEventListener("click", () => {
       .join(", ");
     lottoTicketList.appendChild(lottoTicketClone);
   });
-});
+};
 
 getResultButton.addEventListener("click", () => {
   if (lottoGame === undefined) {
