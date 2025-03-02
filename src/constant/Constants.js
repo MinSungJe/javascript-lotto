@@ -28,6 +28,7 @@ const Constants = Object.freeze({
     TARGET_NUMBER: "> 당첨 번호를 입력해 주세요.",
     BONUS_NUMBER: "> 보너스 번호를 입력해 주세요.",
     RESTART_STRING: "> 다시 시작하시겠습니까? (y/n) ",
+    NO_LOTTO: "아직 로또를 구매하지 않았습니다!",
   },
   ERROR: {
     NO_LOTTO: "[ERROR] 로또를 구매하지 않으셨습니다!",

@@ -1,3 +1,4 @@
+import Constants from "../../constant/Constants.js";
 import state from "../state.js";
 import {
   lottoStatus,
@@ -19,6 +20,11 @@ const LottoListDisplay = {
         .join(", ");
       lottoTicketList.appendChild(lottoTicketClone);
     });
+  },
+
+  reset() {
+    lottoStatus.textContent = Constants.MESSAGE.NO_LOTTO;
+    lottoTicketList.replaceChildren();
   },
 };
 

@@ -15,6 +15,10 @@ const PriceInputForm = {
   onPriceSubmit() {
     console.log("onPriceSubmit 미설정");
   },
+
+  reset() {
+    priceInput.value = "";
+  },
 };
 
 export default PriceInputForm;

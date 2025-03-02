@@ -31,6 +31,13 @@ const WinningLottoInputForm = {
   onSubmitNumbers() {
     console.log("onSubmitNumbers 미설정");
   },
+
+  reset() {
+    targetNumberInputList.forEach(
+      (targetNumberInput) => (targetNumberInput.value = "")
+    );
+    bonusNumberInput.value = "";
+  },
 };
 
 export default WinningLottoInputForm;

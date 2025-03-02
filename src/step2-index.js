@@ -9,13 +9,8 @@ import WinningLottoInputForm from "./components/WinningLottoInputForm/WinningLot
 import Constants from "./constant/Constants.js";
 import LottoGame from "./domain/LottoGame.js";
 import ResultModal from "./components/ResultModal/ResultModal.js";
-import { restartButton } from "./components/ResultModal/elements.js";
 
-const app = document.querySelector("#app");
-const lottoContainer = app.querySelector(".lotto-container");
-const lottoTicketList = app.querySelector("#lotto-ticket-list");
-
-const headerTitle = app.querySelector("#header-title");
+const headerTitle = document.querySelector("#header-title");
 
 headerTitle.addEventListener("click", () => {
   location.reload();
@@ -49,20 +44,9 @@ WinningLottoInputForm.onSubmitNumbers = (
 };
 
 ResultModal.init();
-
-restartButton.addEventListener("click", () => {
-  const priceInput = app.querySelector("#price");
-  const targetNumberInputList = app.querySelectorAll("#target");
-  const bonusNumberInput = app.querySelector("#bonus");
-
-  lottoGame = undefined;
-  lottoContainer.querySelector("#lotto-status").textContent =
-    "아직 로또를 구매하지 않았습니다!";
-  lottoTicketList.replaceChildren();
-  priceInput.value = "";
-  targetNumberInputList.forEach(
-    (targetNumberInput) => (targetNumberInput.value = "")
-  );
-  bonusNumberInput.value = "";
-  resultModal.close();
-});
+ResultModal.onRestart = () => {
+  PriceInputForm.reset();
+  LottoListDisplay.reset();
+  WinningLottoInputForm.reset();
+  ResultModal.close();
+};
